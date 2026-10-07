@@ -1,0 +1,344 @@
+/* ============================================================
+   CattleSense Design System
+   Tailwind CSS v4 — CSS-first configuration
+   ============================================================ */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Sinhala:wght@400;600&display=swap');
+
+@import "tailwindcss";
+
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Light theme */
+  --bg: #F6F8F4;
+  --surface: #FFFFFF;
+  --surface-2: #EEF3EC;
+  --ink: #0E1F1B;
+  --ink-muted: #4B5F59;
+  --line: #DCE5DF;
+  --primary: #0F766E;
+  --primary-strong: #115E59;
+  --leaf: #4D7C0F;
+  --heat-1: #F59E0B;
+  --heat-2: #EF4444;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px 0 rgba(15, 118, 110, 0.08);
+  --shadow-card-hover: 0 8px 36px 0 rgba(15, 118, 110, 0.14);
+
+  /* Radius */
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --radius-pill: 9999px;
+
+  /* Spacing */
+  --section-py: 96px;
+  --content-width: 1200px;
+}
+
+[data-theme="dark"] {
+  --bg: #071512;
+  --surface: #0D201C;
+  --surface-2: #12302A;
+  --ink: #E8F2EE;
+  --ink-muted: #9DB5AD;
+  --line: #1E3A34;
+  --primary: #2DD4BF;
+  --primary-strong: #5EEAD4;
+  --leaf: #A3E635;
+  --heat-1: #FBBF24;
+  --heat-2: #F87171;
+  --shadow-card: 0 4px 24px 0 rgba(0, 0, 0, 0.32);
+  --shadow-card-hover: 0 8px 36px 0 rgba(45, 212, 191, 0.12);
+}
+
+/* ---------- Tailwind v4 theme extension ---------- */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-leaf: var(--leaf);
+  --color-heat-1: var(--heat-1);
+  --color-heat-2: var(--heat-2);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sinhala: 'Noto Sans Sinhala', sans-serif;
+
+  --border-radius-card: 20px;
+  --border-radius-control: 12px;
+  --border-radius-pill: 9999px;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.font-mono, code, pre {
+  font-family: var(--font-mono);
+}
+
+/* ---------- Eyebrow section title group ---------- */
+.section-header {
+  margin-bottom: 3rem;
+}
+.section-header .eyebrow-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+.section-header .eyebrow-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  max-width: 48px;
+  background: var(--primary);
+  opacity: 0.5;
+  border-radius: 1px;
+}
+
+/* ---------- Focus rings ---------- */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(15, 118, 110, 0.18);
+  color: var(--ink);
+}
+
+/* ---------- Utility classes ---------- */
+.section-py {
+  padding-top: var(--section-py);
+  padding-bottom: var(--section-py);
+}
+
+.content-width {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (max-width: 768px) {
+  :root { --section-py: 64px; }
+  .content-width { padding-inline: 16px; }
+}
+
+/* ---------- Scan line animation ---------- */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.scan-line {
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), rgba(45,212,191,0.6), var(--primary), transparent);
+  animation: scanline 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---------- Heat glow ---------- */
+.heat-glow {
+  background: radial-gradient(ellipse at center, rgba(245,158,11,0.18) 0%, rgba(239,68,68,0.08) 50%, transparent 70%);
+}
+
+/* ---------- Topographic contour ---------- */
+.topo-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cpath d='M0 300 Q150 250 300 300 Q450 350 600 300' fill='none' stroke='%230F766E' stroke-width='1' stroke-opacity='0.07'/%3E%3Cpath d='M0 340 Q150 290 300 340 Q450 390 600 340' fill='none' stroke='%230F766E' stroke-width='1' stroke-opacity='0.05'/%3E%3Cpath d='M0 260 Q150 210 300 260 Q450 310 600 260' fill='none' stroke='%230F766E' stroke-width='1' stroke-opacity='0.05'/%3E%3Cpath d='M0 380 Q150 330 300 380 Q450 430 600 380' fill='none' stroke='%234D7C0F' stroke-width='1' stroke-opacity='0.04'/%3E%3Cpath d='M0 220 Q150 170 300 220 Q450 270 600 220' fill='none' stroke='%234D7C0F' stroke-width='1' stroke-opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 600px 600px;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scan-line { display: none; }
+}
+
+/* ---------- Scrollbar progress bar ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--heat-1));
+  z-index: 9999;
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ---------- Custom arc animation ---------- */
+@keyframes arcFill {
+  from { stroke-dashoffset: 251; }
+  to   { stroke-dashoffset: var(--target-offset); }
+}
+
+.arc-animate {
+  animation: arcFill 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ---------- Number count animation ---------- */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Card hover ---------- */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--primary) !important;
+}
+
+/* ---------- Ghost button defined shape ---------- */
+.btn-ghost-fix {
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  background: transparent;
+  transition: box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.btn-ghost-fix:hover {
+  box-shadow: inset 0 0 0 1.5px var(--primary);
+  background: rgba(15,118,110,0.06);
+  color: var(--primary);
+}
+[data-theme='dark'] .btn-ghost-fix:hover {
+  background: rgba(45,212,191,0.08);
+}
+
+/* ---------- Timeline ---------- */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+  transform: translateX(-50%);
+}
+
+.timeline-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--leaf));
+  transition: height 0.1s ease;
+}
+
+/* Mobile: single column timeline */
+@media (max-width: 640px) {
+  .timeline-line {
+    left: 20px;
+  }
+  .timeline-item-left,
+  .timeline-item-right {
+    width: calc(100% - 48px);
+    margin-left: 48px !important;
+    padding-left: 16px !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+  }
+  .timeline-dot {
+    left: 0 !important;
+    transform: none !important;
+  }
+  .timeline-status-row {
+    justify-content: flex-start !important;
+  }
+}
+
+/* ---------- Domain sidenav scroll hint ---------- */
+.domain-sidenav {
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 24px), transparent 100%);
+}
+@media (min-width: 1024px) {
+  .domain-sidenav {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 21, 18, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+  backdrop-filter: blur(8px);
+}
+
+/* ---------- Mobile menu ---------- */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--surface);
+  z-index: 8000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Pill nav indicator ---------- */
+.nav-pill {
+  position: absolute;
+  background: var(--surface-2);
+  border-radius: var(--radius-pill);
+  transition: left 0.3s cubic-bezier(0.4,0,0.2,1), width 0.3s cubic-bezier(0.4,0,0.2,1);
+}
