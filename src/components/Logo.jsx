@@ -1,29 +1,27 @@
-// Wordmark logo: tries logo.png first, falls back to SVG text mark
 import { useState } from 'react';
 
 export function Logo({ className = '' }) {
   const [imgError, setImgError] = useState(false);
 
-  if (!imgError) {
-    return (
-      <img
-        src="/assets/images/logo.png"
-        alt="CattleSense"
-        height={36}
-        className={`h-9 w-auto ${className}`}
-        onError={() => setImgError(true)}
-      />
-    );
-  }
-
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <LeafPulseMark />
+    <div className={`flex items-center gap-2.5 ${className}`}>
+      {!imgError ? (
+        <img
+          src="/cs-logo.png"
+          alt="CattleSense Logo"
+          width={36}
+          height={36}
+          className="h-9 w-9 rounded-xl object-contain shadow-xs flex-shrink-0"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <LeafPulseMark />
+      )}
       <span
         style={{
           fontFamily: 'var(--font-heading)',
           fontWeight: 800,
-          fontSize: '1.15rem',
+          fontSize: '1.2rem',
           color: 'var(--ink)',
           letterSpacing: '-0.02em',
           lineHeight: 1,

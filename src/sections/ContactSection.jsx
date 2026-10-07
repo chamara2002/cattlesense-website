@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send, AlertCircle, CheckCircle } from 'lucide-react';
+import { Send, AlertCircle, CheckCircle, Mail, MapPin } from 'lucide-react';
 import { Eyebrow, SectionTitle, Button, TodoChip } from '../components/Primitives';
 import { Reveal } from '../components/Reveal';
 import { contact } from '../data/siteContent';
@@ -98,30 +98,59 @@ export function ContactSection() {
         </Reveal>
 
         <div className="grid lg:grid-cols-2 gap-10 max-w-4xl">
-          {/* Left: invitation */}
+          {/* Left: invitation & details */}
           <Reveal delay={0}>
-            <div>
-              <p className="mb-6" style={{ color: 'var(--ink-muted)', lineHeight: 1.8, fontSize: '1.02rem' }}>
+            <div className="space-y-4">
+              <p className="mb-2" style={{ color: 'var(--ink-muted)', lineHeight: 1.8, fontSize: '1.02rem' }}>
                 {contact.inviteText}
               </p>
+
+              {/* Group Email */}
               <div
-                className="rounded-2xl p-5 border"
-                style={{ background: 'var(--surface)', borderColor: 'var(--line)' }}
+                className="rounded-2xl p-5 border flex items-start gap-3.5"
+                style={{ background: 'var(--surface)', borderColor: 'var(--line)', borderRadius: 'var(--radius-card)' }}
               >
-                <p className="text-xs font-mono uppercase tracking-widest mb-2" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
-                  Group Email
-                </p>
-                {contact.groupEmail === 'TODO' ? (
-                  <TodoChip />
-                ) : (
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(15,118,110,0.1)', color: 'var(--primary)' }}
+                >
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
+                    Group Email
+                  </p>
                   <a
                     href={`mailto:${contact.groupEmail}`}
-                    className="font-mono text-sm font-medium hover:text-primary transition-colors"
+                    className="font-mono text-sm font-semibold hover:text-primary transition-colors"
                     style={{ color: 'var(--ink)', fontFamily: 'var(--font-mono)' }}
                   >
                     {contact.groupEmail}
                   </a>
-                )}
+                </div>
+              </div>
+
+              {/* Address */}
+              <div
+                className="rounded-2xl p-5 border flex items-start gap-3.5"
+                style={{ background: 'var(--surface)', borderColor: 'var(--line)', borderRadius: 'var(--radius-card)' }}
+              >
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(77,124,15,0.1)', color: 'var(--leaf)' }}
+                >
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-widest mb-1" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>
+                    Address
+                  </p>
+                  <address className="not-italic text-sm leading-relaxed" style={{ color: 'var(--ink)' }}>
+                    Sri Lanka Institute of Information Technology,<br />
+                    Malabe,<br />
+                    Sri Lanka.
+                  </address>
+                </div>
               </div>
             </div>
           </Reveal>

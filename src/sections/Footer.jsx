@@ -27,14 +27,8 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Logo className="mb-3" />
-            <p className="text-sm mb-1" style={{ color: 'var(--ink-muted)', lineHeight: 1.65 }}>
+            <p className="text-sm" style={{ color: 'var(--ink-muted)', lineHeight: 1.65 }}>
               {site.fullTitle}
-            </p>
-            <p className="text-xs font-mono" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
-              {site.institute}
-            </p>
-            <p className="text-xs font-mono mt-0.5" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
-              {site.faculty} · {site.groupId}
             </p>
           </div>
 
@@ -82,14 +76,11 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6"
+          className="flex items-center justify-end pt-6"
           style={{ borderTop: '1px solid var(--line)' }}
         >
-          <p className="text-xs" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
-            © {new Date().getFullYear()} CattleSense · {site.groupId} · {site.institute}
-          </p>
-          <p className="text-xs" style={{ color: 'var(--ink-muted)' }}>
-            Built with React, Vite &amp; Tailwind CSS
+          <p className="text-xs text-right ml-auto" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
+            © {new Date().getFullYear()} CattleSense
           </p>
         </div>
       </div>

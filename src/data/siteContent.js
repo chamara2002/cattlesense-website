@@ -10,7 +10,6 @@ export const site = {
   fullTitle: "Machine Learning Based Early Detection of Cattle Diseases",
   institute: "Sri Lanka Institute of Information Technology (SLIIT)",
   faculty: "Faculty of Computing",
-  groupId: "R26-IT-045",
   liveUrl: "https://cattlesensesl.vercel.app/",
   summary:
     "A web platform for Sri Lankan smallholder dairy farmers that screens cattle for four diseases from phone photos and simple farm measurements, explains the result, and produces a bilingual report for the veterinarian.",
@@ -38,7 +37,6 @@ export const modules = [
     slug: "mastitis",
     disease: "Mastitis",
     owner: "Perera L. C. C.",
-    studentId: "IT22153036",
     tint: "teal",
     description:
       "Udder image analysis fused with milk biomarker data to detect mastitis early, with Grad-CAM explanations and severity staging.",
@@ -70,7 +68,6 @@ export const modules = [
     disease: "Foot and Mouth Disease",
     shortDisease: "FMD",
     owner: "Sudasinghe D. D.",
-    studentId: "IT22129512",
     tint: "amber",
     description:
       "EfficientNetB0 image model combined with clinical signs and real-time Open-Meteo weather data for robust FMD detection.",
@@ -100,7 +97,6 @@ export const modules = [
     disease: "Lumpy Skin Disease",
     shortDisease: "LSD",
     owner: "Manathunga M. A. A. S.",
-    studentId: "IT22282422",
     tint: "leaf",
     description:
       "YOLOv8s real-time lesion detection combined with ResNet50 classification for accurate identification of lumpy skin disease.",
@@ -130,7 +126,6 @@ export const modules = [
     disease: "Milk Fever",
     shortDisease: "Milk Fever",
     owner: "Udawaththa M. P. A. M.",
-    studentId: "IT22221728",
     tint: "rose",
     description:
       "Random Forest and XGBoost ensemble on clinical and production data achieves near-perfect accuracy for milk fever risk prediction.",
@@ -220,13 +215,13 @@ export const domain = {
 // MILESTONES
 // ----------------------------------------------------------------
 export const milestones = [
-  { title: "Project Proposal", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Progress Presentation 1", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Progress Presentation 2", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Research Paper", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Final Presentation and Viva", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Final Report", date: "TODO", marks: "TODO", status: "TODO" },
-  { title: "Website", date: "TODO", marks: "TODO", status: "TODO" },
+  { title: "Project Proposal", date: "March 2026", status: "Completed" },
+  { title: "Progress Presentation 1", date: "May 2026", status: "Completed" },
+  { title: "Progress Presentation 2", date: "August 2026", status: "Completed" },
+  { title: "Research Paper", date: "August 2026", status: "Completed" },
+  { title: "Final Presentation and Viva", date: "TODO", status: "TODO" },
+  { title: "Final Report", date: "TODO", status: "TODO" },
+  { title: "Website", date: "TODO", status: "TODO" },
 ];
 
 // ----------------------------------------------------------------
@@ -320,58 +315,54 @@ export const team = {
   supervisors: [
     {
       id: "supervisor",
-      name: "TODO",
-      title: "TODO",
-      department: "TODO",
-      email: "TODO",
+      name: "Dr. Prasanna Sumathipala",
+      title: "Dean/Academic ",
+      department: "Department of Information Technology, Faculty of Computing, Sri Lanka Institute of Information Technology, Matara, Sri Lanka",
+      email: "prasanna.s@sliit.lk",
       role: "Supervisor",
     },
     {
       id: "cosupervisor",
-      name: "TODO",
-      title: "TODO",
-      department: "TODO",
-      email: "TODO",
+      name: "Ms. Thilini Jayalath",
+      title: "Senior Lecturer",
+      department: "Department of Information Technology, Faculty of Computing, Sri Lanka Institute of Information Technology, Malabe, Sri Lanka",
+      email: "thilini.j@sliit.lk",
       role: "Co-supervisor",
     },
   ],
   members: [
     {
-      id: "it22153036",
+      id: "perera-lcc",
       name: "Perera L. C. C.",
-      studentId: "IT22153036",
       component: "Mastitis Detection",
-      email: "TODO",
+      email: "lccperera2002@gmail.com",
       linkedin: "TODO",
       github: "TODO",
       photo: "/assets/images/team/it22153036.jpg",
     },
     {
-      id: "it22129512",
+      id: "sudasinghe-dd",
       name: "Sudasinghe D. D.",
-      studentId: "IT22129512",
       component: "FMD Detection",
-      email: "TODO",
+      email: "ddsudasinghe@gmail.com",
       linkedin: "TODO",
       github: "TODO",
       photo: "/assets/images/team/it22129512.jpg",
     },
     {
-      id: "it22282422",
+      id: "manathunga-maas",
       name: "Manathunga M. A. A. S.",
-      studentId: "IT22282422",
       component: "LSD Detection",
-      email: "TODO",
+      email: "shehara314@gmail.com",
       linkedin: "TODO",
       github: "TODO",
       photo: "/assets/images/team/it22282422.jpg",
     },
     {
-      id: "it22221728",
+      id: "udawaththa-mpam",
       name: "Udawaththa M. P. A. M.",
-      studentId: "IT22221728",
       component: "Milk Fever Detection",
-      email: "TODO",
+      email: "udawaththaminol@gmail.com",
       linkedin: "TODO",
       github: "TODO",
       photo: "/assets/images/team/it22221728.jpg",
@@ -383,7 +374,13 @@ export const team = {
 // CONTACT
 // ----------------------------------------------------------------
 export const contact = {
-  groupEmail: "TODO",
+  groupEmail: "cattlesenselk@gmail.com",
+  address: "Sri Lanka Institute of Information Technology,\nMalabe,\nSri Lanka.",
+  addressLines: [
+    "Sri Lanka Institute of Information Technology,",
+    "Malabe,",
+    "Sri Lanka."
+  ],
   inviteText:
     "Have questions about the research, want to collaborate, or are you a veterinarian interested in the system? We'd love to hear from you.",
 };

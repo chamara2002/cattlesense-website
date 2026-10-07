@@ -105,11 +105,8 @@ function TimelineItem({ milestone, index }) {
               <StatusChip status={milestone.status} />
             </div>
             <div className="flex flex-col gap-1">
-              <MetaRow label="Date">
-                {milestone.date === 'TODO' ? <TodoChip /> : <span style={{ color: 'var(--ink)' }}>{milestone.date}</span>}
-              </MetaRow>
-              <MetaRow label="Marks">
-                {milestone.marks === 'TODO' ? <TodoChip /> : <span style={{ color: 'var(--ink)' }}>{milestone.marks}</span>}
+              <MetaRow label="Date" isLeft={isLeft}>
+                {milestone.date === 'TODO' ? <TodoChip /> : <span>{milestone.date}</span>}
               </MetaRow>
             </div>
           </div>
@@ -119,13 +116,13 @@ function TimelineItem({ milestone, index }) {
   );
 }
 
-function MetaRow({ label, children }) {
+function MetaRow({ label, children, isLeft }) {
   return (
-    <div className="flex items-center gap-2 flex-wrap">
+    <div className={`flex items-center gap-1.5 flex-wrap ${isLeft ? 'justify-end' : 'justify-start'}`}>
       <span className="text-xs font-mono" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
         {label}:
       </span>
-      <span className="text-xs">{children}</span>
+      <span className="text-xs font-medium" style={{ color: 'var(--ink)' }}>{children}</span>
     </div>
   );
 }

@@ -69,17 +69,11 @@ function MemberCard({ member }) {
 
       <div className="p-5">
         <h3
-          className="font-heading font-bold mb-0.5"
+          className="font-heading font-bold mb-2"
           style={{ fontFamily: 'var(--font-heading)', color: 'var(--ink)', fontSize: '1rem' }}
         >
           {member.name}
         </h3>
-        <p
-          className="font-mono text-xs mb-2"
-          style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}
-        >
-          {member.studentId}
-        </p>
         <span
           className="inline-block px-2.5 py-1 rounded-full text-xs font-medium mb-3"
           style={{

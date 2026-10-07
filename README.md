@@ -1,7 +1,7 @@
 # CattleSense — Research Showcase Website
 
 > Machine Learning Based Early Detection of Cattle Diseases  
-> SLIIT · Faculty of Computing · R26-IT-045
+> SLIIT · Faculty of Computing
 
 ---
 

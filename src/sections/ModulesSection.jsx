@@ -84,7 +84,7 @@ export function ModulesSection() {
                           {mod.disease}
                         </h3>
                         <p className="font-mono text-xs" style={{ color: 'var(--ink-muted)', fontFamily: 'var(--font-mono)' }}>
-                          {mod.owner} · {mod.studentId}
+                          {mod.owner}
                         </p>
                       </div>
                       <ChevronRight
