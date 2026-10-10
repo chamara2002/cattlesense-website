@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ExternalLink, ChevronDown } from 'lucide-react';
 import { Eyebrow, Button } from '../components/Primitives';
 import { HeroStat } from '../components/StatReadout';
@@ -140,60 +140,8 @@ export function HeroSection() {
               </motion.div>
             </div>
 
-            {/* Right: Real product preview in clean browser frame */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="w-full flex justify-center lg:justify-end"
-            >
-              <div
-                className="hero-preview-frame w-full max-w-[560px] rounded-2xl border overflow-hidden transition-all duration-500"
-                style={{
-                  background: 'var(--surface)',
-                  borderColor: 'var(--line)',
-                  boxShadow: 'var(--shadow-hero-frame, 0 24px 60px -15px rgba(15, 118, 110, 0.22), 0 0 0 1px var(--line))',
-                }}
-              >
-                {/* Clean browser top chrome */}
-                <div
-                  className="flex items-center justify-between px-3.5 py-2.5 border-b"
-                  style={{
-                    background: 'var(--surface-2)',
-                    borderColor: 'var(--line)',
-                  }}
-                >
-                  <div className="flex items-center gap-1.5" aria-hidden="true">
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#EF4444', opacity: 0.8 }} />
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#F59E0B', opacity: 0.8 }} />
-                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#10B981', opacity: 0.8 }} />
-                  </div>
-                  <div
-                    className="px-3 py-0.5 rounded-md text-[11px] font-mono tracking-tight text-center truncate max-w-[220px]"
-                    style={{
-                      background: 'var(--surface)',
-                      border: '1px solid var(--line)',
-                      color: 'var(--ink-muted)',
-                      fontFamily: 'var(--font-mono)',
-                    }}
-                  >
-                    cattlesensesl.vercel.app
-                  </div>
-                  <div className="w-8" aria-hidden="true" />
-                </div>
-
-                {/* Screenshot view */}
-                <div className="relative aspect-[16/10] bg-black/5 overflow-hidden">
-                  <img
-                    src="/assets/images/hero.png"
-                    alt="CattleSense Live Platform Product Interface"
-                    className="w-full h-full object-cover object-top"
-                    onError={() => setHasHeroImage(false)}
-                    loading="eager"
-                  />
-                </div>
-              </div>
-            </motion.div>
+            {/* Right: Uncropped real product preview in interactive 3D frame */}
+            <HeroProduct3D onImgError={() => setHasHeroImage(false)} />
           </div>
         ) : (
           /* Centred single-column layout (fallback when hero image does not exist) */
@@ -322,5 +270,102 @@ export function HeroSection() {
         <ChevronDown size={14} className="animate-bounce" />
       </motion.button>
     </section>
+  );
+}
+
+// ─── Uncropped 3D Interactive Product Showcase ─────────────────────
+function HeroProduct3D({ onImgError }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth springs for cursor-tracking 3D tilt
+  const springX = useSpring(x, { stiffness: 180, damping: 22 });
+  const springY = useSpring(y, { stiffness: 180, damping: 22 });
+
+  const rotateX = useTransform(springY, [-0.5, 0.5], ['7deg', '-7deg']);
+  const rotateY = useTransform(springX, [-0.5, 0.5], ['-8deg', '8deg']);
+  const glareX = useTransform(springX, [-0.5, 0.5], ['20%', '80%']);
+  const glareY = useTransform(springY, [-0.5, 0.5], ['20%', '80%']);
+  const glareOpacity = useTransform(springX, (val) => (val === 0 ? 0 : 0.18));
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const xPos = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPos = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(xPos);
+    y.set(yPos);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+      className="w-full flex justify-center lg:justify-end [perspective:1400px]"
+    >
+      {/* Ambient floating 3D container */}
+      <motion.div
+        animate={{
+          y: [-5, 6, -5],
+          rotateZ: [-0.3, 0.3, -0.3],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: 'preserve-3d',
+        }}
+        className="relative w-full max-w-[580px] rounded-2xl p-1 cursor-pointer transition-shadow duration-500"
+      >
+        {/* Glow backdrop behind preview */}
+        <div
+          className="absolute -inset-2 rounded-3xl opacity-40 blur-xl pointer-events-none transition-opacity duration-500"
+          style={{
+            background: 'radial-gradient(ellipse at center, var(--primary) 0%, rgba(77,124,15,0.2) 50%, transparent 80%)',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Clean browser frame holding the uncropped image */}
+        <div
+          className="relative rounded-2xl border overflow-hidden transition-all duration-300"
+          style={{
+            background: 'var(--surface)',
+            borderColor: 'var(--line)',
+            boxShadow: 'var(--shadow-hero-frame, 0 25px 65px -15px rgba(15, 118, 110, 0.25), 0 0 0 1px var(--line))',
+          }}
+        >
+          {/* Full uncropped screenshot */}
+          <img
+            src="/assets/images/hero.png"
+            alt="CattleSense Live Platform Product Interface"
+            className="w-full h-auto block select-none pointer-events-none"
+            onError={onImgError}
+            loading="eager"
+          />
+
+          {/* Dynamic 3D lighting / specular shine layer */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.22) 0%, transparent 60%)`,
+              opacity: glareOpacity,
+            }}
+            aria-hidden="true"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
